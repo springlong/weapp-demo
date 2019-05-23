@@ -22,7 +22,7 @@
 
 ### 本地资源无法通过 WXSS 获取
 
-background-image：可以使用网络图片，或者 base64，或者使用<image/>标签
+background-image：可以使用网络图片，或者 base64，或者使用`<image/>`标签
 
 ### 小程序内置组件以及自定义组件无法更改样式
 
@@ -47,6 +47,10 @@ map、canvas、video、textarea 是由客户端创建的原生组件，
 自此之后，每次进入一个页面，其data的初始内容都是小程序加载时被执行好的（不考虑分包加载）。
 
 所以我们在使用过程中，切勿在data={}声明中放置一些预期会动态更新的值，以避免对页面逻辑造成影响。
+
+### 页面每次setState传输的数据不能超过1024KB
+
+微信小程序:VM6260:1 vdSyncBatch 数据传输长度限制为1024KB
 
 ## 表单部分
 
@@ -77,6 +81,12 @@ map、canvas、video、textarea 是由客户端创建的原生组件，
 该问题在“京东购物”和“携程酒店机票火车票”等小程序中都存在这个问题。
 
 目前没有找到相关的解决方案。
+
+### 小程序自定义组件中使用表单控件，父级form的submit事件将无法获取这些表单控件的内容
+
+这是由于小程序自定义组件的限制导致的，不过官方提供的behaviors特性可以帮助解决这一问题。
+
+具体可查阅官方文档，了解 [wx://form-field 使自定义组件有类似于表单控件的行为。](#https://developers.weixin.qq.com/miniprogram/dev/framework/custom-component/behaviors.html#wxform-field)
 
 ### 小程序input与H5的属性异同表现
 
